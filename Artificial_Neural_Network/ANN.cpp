@@ -25,7 +25,7 @@ ANN::ANN(size_t sizes[], size_t len)
 	number_of_layers = len;
 
 	this->weights = {
-		slen - 1,
+		len - 1,
 		(vector<vector<NUMS>>*)malloc(sizeof(vector<vector<NUMS>>) * (len - 1)),
 	};
 	this->biases = {

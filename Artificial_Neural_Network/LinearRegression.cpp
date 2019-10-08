@@ -40,26 +40,26 @@ LinearRegression::~LinearRegression()
 	delete_vector(f_to_s_weight);
 }
 
-std::map<std::string, vector<vector<NUMS>>> LinearRegression::train(vector<vector<NUMS>> X_train, vector<vector<NUMS>> Y_train, int num_of_epochs)
+std::map<std::string, vector<vector<NUMS>>> LinearRegression::train(const vector<vector<NUMS>>& X_train, const vector<vector<NUMS>>& Y_train, int num_of_epochs)
 {
-	std::map<std::string, vector<vector<NUMS>>> map;
+	std::map<std::string, vector<vector<NUMS>>> outputs;
 	for (int i = 0; i < num_of_epochs; i++) {
-		map = forward_propogation(X_train);
+		outputs = forward_propogation(X_train);
+		NUMS c = cost(outputs["a2"], Y_train);
 
-		auto c = cost(map["a2"], Y_train);
-
-		auto
+		backward_propogation(outputs, X_train, Y_train);
 	}
-	return map;
+
+	return outputs;
 	
 }
 
-std::map<std::string, vector<vector<NUMS>>> LinearRegression::forward_propogation(vector<vector<NUMS>>& inputs)
+std::map<std::string, vector<vector<NUMS>>> LinearRegression::forward_propogation(const vector<vector<NUMS>>& inputs)
 {
 	std::map<std::string, vector<vector<NUMS>>> map;
-	vector<vector<NUMS>> z1 = mat_add(mat_dot(inputs, this->input_to_f_weight), this->first);
+	vector<vector<NUMS>> z1 = inputs * this->input_to_f_weight + this->first;
 	vector<vector<NUMS>> a1 = sigmoid(z1);
-	vector<vector<NUMS>> z2 = mat_add(mat_dot(a1, this->f_to_s_weight), this->second);
+	vector<vector<NUMS>> z2 = a1 * this->f_to_s_weight + this->second;
 	vector<vector<NUMS>> a2 = sigmoid(z2);
 
 	map["z1"] = z1;
@@ -70,13 +70,25 @@ std::map<std::string, vector<vector<NUMS>>> LinearRegression::forward_propogatio
 	return map;
 }
 
-void LinearRegression::backward_propogation(std::map<std::string, vector<vector<NUMS>>>& cache, vector<vector<NUMS>>& X, vector<vector<NUMS>>& Y)
+void LinearRegression::backward_propogation(std::map<std::string, vector<vector<NUMS>>>& cache, const vector<vector<NUMS>>& X, const vector<vector<NUMS>>& Y)
 {
-
+	vector<vector<NUMS>> dA2 = cache["a2"] - Y;
+	vector<vector<NUMS>> dZ2 = mat_mult(cache["a2"], (1 - cache["a2"])) * dA2;
+	vector<vector<NUMS>> dB2 = dZ2;
 }
 
-NUMS LinearRegression::cost(vector<vector<NUMS>>& a, vector<vector<NUMS>>& y)
+NUMS LinearRegression::cost(const vector<vector<NUMS>>& a, const vector<vector<NUMS>>& y)
 {
-	vector<NUMS>;
-	return 0.0;
+	if (!(a.size == y.size && a.ray[0].size == y.ray[0].size)) {
+		__debugbreak();
+	}
+
+	NUMS cost = 0;
+	for (int i = 0; i < a.size; i++) {
+		for (int j = 0; j < a.ray[0].size; j++) {
+			cost += (a.ray[i].ray[j] - y.ray[i].ray[j]) * (a.ray[i].ray[j] - y.ray[i].ray[j]);
+		}
+	}
+	cost = cost / 2;
+	return cost;
 }

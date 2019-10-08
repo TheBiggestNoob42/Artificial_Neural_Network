@@ -17,11 +17,11 @@ public:
 	LinearRegression(int input_size, int f_neurons, int s_neurons);
 	~LinearRegression();
 
-	std::map<std::string, vector<vector<NUMS>>> train(vector<vector<NUMS>> X_train, vector<vector<NUMS>> Y_train, int num_of_epochs);
+	std::map<std::string, vector<vector<NUMS>>> train(const vector<vector<NUMS>>& X_train, const vector<vector<NUMS>>& Y_train, int num_of_epochs);
 
-	std::map<std::string, vector<vector<NUMS>>> forward_propogation(vector<vector<NUMS>>& inputs);
-	void backward_propogation(std::map<std::string, vector<vector<NUMS>>>& cache, vector<vector<NUMS>>& X, vector<vector<NUMS>>& Y);
+	std::map<std::string, vector<vector<NUMS>>> forward_propogation(const vector<vector<NUMS>>& inputs);
+	void backward_propogation(std::map<std::string, vector<vector<NUMS>>>& cache, const vector<vector<NUMS>>& X, const vector<vector<NUMS>>& Y);
 
-	NUMS cost(vector<vector<NUMS>>& a, vector<vector<NUMS>>& y);
+	NUMS cost(const vector<vector<NUMS>>& a, const vector<vector<NUMS>>& y);
 };
 
