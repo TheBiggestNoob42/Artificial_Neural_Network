@@ -1,5 +1,6 @@
 #include "util.h"
 #include <iostream>
+#include <cmath>
 
 vector<vector<NUMS>> mat_dot(const vector<vector<NUMS>>& a1, const vector<vector<NUMS>>& a2)
 {
@@ -64,6 +65,24 @@ vector<vector<NUMS>> mat_add(const vector<vector<NUMS>>& a1, const NUMS& b1)
 	return mat;
 }
 
+vector<vector<NUMS>> mat_sub(const vector<vector<NUMS>>& a1, const vector<vector<NUMS>>& b1)
+{
+	vector<vector<NUMS>> mat = {
+		a1.size,
+		(vector<NUMS>*)malloc(sizeof(vector<NUMS>) * a1.size),
+	};
+	for (int i = 0; i < a1.size; i++) {
+		mat.ray[i] = {
+			a1.ray[0].size,
+			(NUMS*)malloc(sizeof(NUMS) * a1.ray[0].size),
+		};
+		for (int j = 0; j < a1.ray[0].size; j++) {
+			mat.ray[i].ray[j] = a1.ray[i].ray[j] - b1.ray[i].ray[j];
+		}
+	}
+	return mat;
+}
+
 vector<vector<NUMS>> sigmoid(const vector<vector<NUMS>>& a1)
 {
 	vector<vector<NUMS>> mat = {
@@ -76,7 +95,7 @@ vector<vector<NUMS>> sigmoid(const vector<vector<NUMS>>& a1)
 			(NUMS*)malloc(sizeof(NUMS) * a1.ray[i].size),
 		};
 		for (int j = 0; j < a1.ray[i].size; j++) {
-			mat.ray[i].ray[j] = F(a1.ray[i].ray[j]);
+			mat.ray[i].ray[j] = 1 / 1 + exp(-a1.ray[i].ray[j]);
 		}
 	}
 	return mat;
