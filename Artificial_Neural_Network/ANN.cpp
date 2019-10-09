@@ -47,15 +47,6 @@ ANN::~ANN()
 
 vector<vector<NUMS>> ANN::forward_propogation(vector<vector<NUMS>> input) {
 	int num_of_inputs = input.size;
-
-	vector<vector<NUMS>> new_input;
-	for (int i = 0; i < weights.size; i++) {
-		new_input = sigmoid(mat_add(mat_dot(input, weights.ray[i]), biases.ray[i]));
-		delete_vector(input);
-		input = new_input;
-	}
-
-	return input;
 }
 
 vector<vector<vector<NUMS>>> ANN::getWeight()

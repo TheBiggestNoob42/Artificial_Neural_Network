@@ -15,7 +15,7 @@ vector<vector<NUMS>> operator-(const vector<vector<NUMS>>& a1, const NUMS& b1);
 vector<vector<NUMS>> operator-(const NUMS& a1, const vector<vector<NUMS>>& b1);
 
 vector<vector<NUMS>> sigmoid(const vector<vector<NUMS>>& a1);
-
+vector<vector<NUMS>> sigmoid_derivative(const vector<vector<NUMS>>& a1);
 void delete_vector(vector<vector<vector<NUMS>>>& a1);
 void delete_vector(vector<vector<NUMS>>& a1);
 void delete_vector(vector<NUMS>& a1);

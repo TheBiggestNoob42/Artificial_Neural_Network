@@ -73,8 +73,13 @@ std::map<std::string, vector<vector<NUMS>>> LinearRegression::forward_propogatio
 void LinearRegression::backward_propogation(std::map<std::string, vector<vector<NUMS>>>& cache, const vector<vector<NUMS>>& X, const vector<vector<NUMS>>& Y)
 {
 	vector<vector<NUMS>> dA2 = cache["a2"] - Y;
-	vector<vector<NUMS>> dZ2 = mat_mult(cache["a2"], (1 - cache["a2"])) * dA2;
-	vector<vector<NUMS>> dB2 = dZ2;
+	//sigmoid derivative
+	vector<vector<NUMS>> dZ2 = mat_mult(sigmoid_derivative(cache["a2"]), dA2);
+	vector<vector<NUMS>> dB2 = dZ2 - 0;
+	vector<vector<NUMS>> dW2 = mat_mult(cache["a1"], dZ2);
+
+	vector<vector<NUMS>> dA1 = mat_mult(cache["a1"], dZ2);
+	vector<vector<NUMS>> dZ1 = np.dot();
 }
 
 NUMS LinearRegression::cost(const vector<vector<NUMS>>& a, const vector<vector<NUMS>>& y)
