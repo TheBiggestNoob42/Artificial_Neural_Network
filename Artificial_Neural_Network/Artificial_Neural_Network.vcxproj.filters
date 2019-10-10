@@ -27,9 +27,6 @@
     <ClCompile Include="LinearRegression.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="vector.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MNIST_Reader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -45,9 +42,6 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="LinearRegression.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="vector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MNIST_Reader.h">

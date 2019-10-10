@@ -25,6 +25,7 @@ int main() {
 		cout << endl;
 		cout << endl;
 	}
+	cout << "ello World" << endl;
 	//int size[] = {28 * 28, 100, 100, 10};
 	/*
 	size_t size[] = { 3, 4, 4, 2 };
