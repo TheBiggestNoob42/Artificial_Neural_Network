@@ -17,7 +17,7 @@ public:
 	ANN(size_t size[], size_t len);
 	~ANN();
 
-	vector<vector<NUMS>> forward_propogation(vector<vector<NUMS>> input);
+	// vector<vector<NUMS>> forward_propogation(vector<vector<NUMS>> input);
 
 	vector<vector<vector<NUMS>>> getWeight();
 	vector<NUMS> getBiases();

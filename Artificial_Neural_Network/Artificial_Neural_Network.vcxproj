@@ -128,6 +128,7 @@
     <ClCompile Include="ANN.cpp" />
     <ClCompile Include="LinearRegression.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MNIST_Reader.cpp" />
     <ClCompile Include="util.cpp" />
     <ClCompile Include="vector.cpp" />
   </ItemGroup>
@@ -135,6 +136,7 @@
     <ClInclude Include="ANN.h" />
     <ClInclude Include="declarations.h" />
     <ClInclude Include="LinearRegression.h" />
+    <ClInclude Include="MNIST_Reader.h" />
     <ClInclude Include="util.h" />
     <ClInclude Include="vector.h" />
   </ItemGroup>

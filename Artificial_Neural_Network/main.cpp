@@ -1,15 +1,32 @@
 #include "ANN.h"
-
-#include <fstream>
+#include "LinearRegression.h"
+#include "MNIST_Reader.h"
 #include <iostream>
 #include <chrono>
 #include <string>
-#include <sstream>
+#include <iostream>
 using namespace std;
 
 int main() {
 	srand(1);
+	MNIST_Reader reader(100, 1000);
+	vector<vector<NUMS>> X_train = reader.get_training_images();
+
+	auto encoder = [](NUMS n) {
+		return (n < 127) ? '.' : '#';
+	};
+	for (size_t i = 0; i < X_train.size; i++) {
+		for (int j = 0; j < 28*28; j++) {
+			cout << encoder(X_train.ray[i].ray[j]);
+			if (j % 28 == 27) {
+				cout << endl;
+			}
+		}
+		cout << endl;
+		cout << endl;
+	}
 	//int size[] = {28 * 28, 100, 100, 10};
+	/*
 	size_t size[] = { 3, 4, 4, 2 };
 	ANN network(size, 4);
 	
@@ -33,100 +50,7 @@ int main() {
 	}
 	cout << endl;
 	cout << endl;
-
-	size_t N;
-	cout << "Enter in the number of inputs cases: ";
-	cin >> N;
-
-	vector<vector<NUMS>> input = {
-		N,
-		(vector<NUMS>*)malloc(sizeof(vector<NUMS>) * N),
-	};
-
-	string raw_input;
-	NUMS value;
-
-	getline(cin, raw_input);
-
-	for (int i = 0; i < N; i++) {
-		input.ray[i] = {
-			size[0],
-			(NUMS*)malloc(sizeof(NUMS) * size[0]),
-		};
-		getline(cin, raw_input);
-		stringstream ss(raw_input);
-		int j = 0;
-		while (ss >> value) {
-			input.ray[i].ray[j++] = value;
-		}
-	}
-
-	input = network.forward_propogation(input);
-	for (int i = 0; i < input.size; i++) {
-		for (int j = 0; j < input.ray[i].size; j++) {
-			cout << input.ray[i].ray[j] << " ";
-		}
-		cout << endl;
-	}
-	/*
-	vector<double> a = {
-		10000000,
-		(double*)malloc(sizeof(double) * 10000000),
-	};
-	vector<double> b = {
-		10000000,
-		(double*)malloc(sizeof(double) * 10000000),
-	};
-	for (int i = 0; i < 10000000; i++) {
-		a.ray[i] = i + 1.0;
-		b.ray[i] = i + 1.0;
-	}
-
-	cout << "Taking the dot product of two vectors, ones that I created, with 10,000,000 elements each." << endl;
-
-	vector<double> c = {
-		10000000,
-		(double*)malloc(sizeof(double) * 10000000),
-	};
-	double sum = 0.0;
-	auto t1 = chrono::high_resolution_clock::now();
-	for (int i = 0; i < a.size; i++) {
-		c.ray[i] = a.ray[i] * b.ray[i];
-	}
-	auto t2 = chrono::high_resolution_clock::now();
-	auto reg = chrono::duration_cast<chrono::microseconds>(t2 - t1).count();
-	cout << "Regular time: " << reg << " microseconds" << endl;
-	delete c.ray;
-
-	c = {
-		10000000,
-		(double*)malloc(sizeof(double) * 10000000),
-	};
-	sum = 0.0;
-	t1 = chrono::high_resolution_clock::now();
-	#pragma loop(no_vector)
-	for (int i = 0; i < a.size; i++) {
-		c.ray[i] = a.ray[i] * b.ray[i];
-	}
-	t2 = chrono::high_resolution_clock::now();
-	reg = chrono::duration_cast<chrono::microseconds>(t2 - t1).count();
-	cout << "Non-vectorized time: " << reg << " microseconds" << endl;
-	delete c.ray;
-
-	c = {
-		10000000,
-		(double*)malloc(sizeof(double) * 10000000),
-	};
-	sum = 0.0;
-	t1 = chrono::high_resolution_clock::now();
-	#pragma ivdep
-	for (int i = 0; i < a.size; i++) {
-		c.ray[i] = a.ray[i] * b.ray[i];
-	}
-	t2 = chrono::high_resolution_clock::now();
-	reg = chrono::duration_cast<chrono::microseconds>(t2 - t1).count();
-	cout << "Vectorized time: " << reg << " microseconds" << endl;
-	delete c.ray;
 	*/
+
 	return 0;
 }
