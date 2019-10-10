@@ -35,10 +35,11 @@ vector<vector<NUMS>> MNIST_Reader::mnist_images(bool is_train)
 
 		char c;
 		for (int i = 0; i < number_of_training_sets; i++) {
-			mat.ray[i] = vector<NUMS>(n_rows * n_cols);
+			mat[i] = vector<NUMS>(n_rows * n_cols);
 			for (int j = 0; j < n_rows * n_cols; j++) {
-				input_train_data.read((char*)& c, sizeof(c)), mat.ray[i].ray[j] = (double)((int)c);
+				input_train_data.read((char*)& c, sizeof(c)), mat[i][j] = (double)((int)c);
 			}
+			cout << endl;
 		}
 
 		input_train_data.close();
@@ -69,9 +70,9 @@ vector<vector<NUMS>> MNIST_Reader::mnist_images(bool is_train)
 
 		char c;
 		for (int i = 0; i < number_of_testing_sets; i++) {
-			mat.ray[i] = vector<NUMS>(n_rows * n_cols);
+			mat[i] = vector<NUMS>(n_rows * n_cols);
 			for (int j = 0; j < n_rows * n_cols; j++) {
-				input_test_data.read((char*)& c, sizeof(c)), mat.ray[i].ray[j] = (double)((int)c);
+				input_test_data.read((char*)& c, sizeof(c)), mat[i][j] = (double)((int)c);
 			}
 		}
 
@@ -92,7 +93,7 @@ vector<vector<NUMS>> MNIST_Reader::mnist_labels(bool is_train)
 	if (is_train) {
 		vector<vector<NUMS>> mat = vector<vector<NUMS>>(number_of_training_sets);
 		if (!input_train_label.is_open()) {
-			input_train_label.open("train-labels.idx3-ubyte", ios::binary);
+			input_train_label.open("train-labels.idx1-ubyte", ios::binary);
 		}
 
 		int magic_number = 0, number_of_labels = 0;
@@ -111,19 +112,19 @@ vector<vector<NUMS>> MNIST_Reader::mnist_labels(bool is_train)
 		char c;
 		int f;
 		for (int i = 0; i < number_of_training_sets; i++) {
-			mat.ray[i] = vector<NUMS>(10);
+			mat[i] = vector<NUMS>(10);
 			input_train_label.read((char*)& c, sizeof(c)), f = (int)c;
 			for (int j = 0; j < 10; j++) {
-				mat.ray[i].ray[j] = 0.0;
+				mat[i][j] = 0.0;
 			}
-			mat.ray[i].ray[f] = 1.0;
+			mat[i][f] = 1.0;
 		}
 		return mat;
 	}
 	else {
 		vector<vector<NUMS>> mat = vector<vector<NUMS>>(number_of_testing_sets);
 		if (!input_test_label.is_open()) {
-			input_test_label.open("t10k-labels.idx3-ubyte", ios::binary);
+			input_test_label.open("t10k-labels.idx1-ubyte", ios::binary);
 		}
 
 		int magic_number = 0, number_of_labels = 0;
@@ -142,12 +143,12 @@ vector<vector<NUMS>> MNIST_Reader::mnist_labels(bool is_train)
 		char c;
 		int f;
 		for (int i = 0; i < number_of_training_sets; i++) {
-			mat.ray[i] = vector<NUMS>(10);
+			mat[i] = vector<NUMS>(10);
 			input_train_label.read((char*)& c, sizeof(c)), f = (int)c;
 			for (int j = 0; j < 10; j++) {
-				mat.ray[i].ray[j] = 0.0;
+				mat[i][j] = 0.0;
 			}
-			mat.ray[i].ray[f] = 1.0;
+			mat[i][f] = 1.0;
 		}
 		return mat;
 	}
@@ -159,10 +160,10 @@ MNIST_Reader::MNIST_Reader(int n_of_train_set, int n_of_test_set)
 	number_of_testing_sets = n_of_test_set;
 
 	input_train_data = ifstream("train-images.idx3-ubyte", ios::binary);
-	input_train_label = ifstream("train-labels.idx3-ubyte", ios::binary);
+	input_train_label = ifstream("train-labels.idx1-ubyte", ios::binary);
 
 	input_test_data = ifstream("t10k-images.idx3-ubyte", ios::binary);
-	input_test_label = ifstream("t10k-labels.idx3-ubyte", ios::binary);
+	input_test_label = ifstream("t10k-labels.idx1-ubyte", ios::binary);
 }
 
 MNIST_Reader::~MNIST_Reader()

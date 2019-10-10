@@ -7,7 +7,7 @@ class ANN
 {
 private:
 	size_t* layers;
-	int number_of_layers;
+	size_t number_of_layers;
 
 	vector<vector<vector<NUMS>>> weights;
 	vector<NUMS> biases;
