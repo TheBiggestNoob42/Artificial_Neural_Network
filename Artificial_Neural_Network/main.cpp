@@ -9,13 +9,12 @@ using namespace std;
 
 int main() {
 	srand(1);
-	MNIST_Reader reader(1, 1000);
+	MNIST_Reader reader(10, 1000);
 	vector<vector<NUMS>> X_train = reader.get_training_images();
 	vector<vector<NUMS>> Y_train = reader.get_training_labels();
 	
-	/*
 	auto encoder = [](NUMS n) {
-		return (n < 20) ? '.' : (n < 40) ? '+' : '#';
+		return (n < 0.05) ? '.' : (n < 0.2) ? '+' : '#';
 	};
 	for (size_t i = 0; i < X_train.size(); i++) {
 		for (int j = 0; j < Y_train[i].size(); j++) {
@@ -30,36 +29,37 @@ int main() {
 		}
 		cout << endl;
 		cout << endl;
-	} */
+	}
 
 	LinearRegression lr(784, 200, 10);
 	lr.train(X_train, Y_train, 100, 0.1);
 
+
+	/*
+	auto f = [](vector<NUMS> x) {
+		NUMS cost = 0;
+		for (int i = 0; i < x.size(); i++) {
+			cost += x[i];
+		}
+		return 2 * cost;
+	};
+	vector<vector<NUMS>> X_exp = vector<vector<NUMS>>(1);
+	vector<vector<NUMS>> Y_exp = vector<vector<NUMS>>(1);
+	for (int i = 0; i < 1; i++) {
+		X_exp[i] = vector<NUMS>(3);
+		for (int j = 0; j < 3; j++) {
+			X_exp[i][j] = (i + 1) * (j + 1);
+		}
+		Y_exp[i] = vector<NUMS>(1);
+		Y_exp[i][0] = f(X_exp[i]);
+	}
+
+	LinearRegression lr2(3, 4, 1);
+	lr2.train(X_exp, Y_exp, 50, 0.05);
+	*/
 	//int size[] = {28 * 28, 100, 100, 10};
 	/*
-	size_t size[] = { 3, 4, 4, 2 };
 	ANN network(size, 4);
-	
-	cout << "Weight Matrices" << endl;
-	cout << "===================" << endl;
-	auto weight = network.getWeight();
-	for (int mat = 0; mat < weight.size(); mat++) {
-		for (int row = 0; row < weight[mat].size(); row++) {
-			for (int col = 0; col < weight[mat][row].size(); col++) {
-				cout << weight[mat][row][col] << " ";
-			}
-			cout << endl;
-		}
-		cout << endl;
-	}
-	cout << "Bases Vectors" << endl;
-	cout << "===================" << endl;
-	auto biases = network.getBiases();
-	for (int col = 0; col < biases.size(); col++) {
-		cout << biases[col] << " ";
-	}
-	cout << endl;
-	cout << endl;
 	*/
 
 	return 0;

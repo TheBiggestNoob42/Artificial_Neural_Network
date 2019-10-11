@@ -1,4 +1,5 @@
 #include "MNIST_Reader.h"
+#define NORMALIZING_CONSTANT 255.0
 
 vector<vector<NUMS>> MNIST_Reader::mnist_images(bool is_train)
 {
@@ -37,7 +38,7 @@ vector<vector<NUMS>> MNIST_Reader::mnist_images(bool is_train)
 		for (int i = 0; i < number_of_training_sets; i++) {
 			mat[i] = vector<NUMS>(n_rows * n_cols);
 			for (int j = 0; j < n_rows * n_cols; j++) {
-				input_train_data.read((char*)& c, sizeof(c)), mat[i][j] = (double)((int)c);
+				input_train_data.read((char*)& c, sizeof(c)), mat[i][j] = (double)((int)c) / NORMALIZING_CONSTANT;
 			}
 			cout << endl;
 		}
@@ -72,7 +73,7 @@ vector<vector<NUMS>> MNIST_Reader::mnist_images(bool is_train)
 		for (int i = 0; i < number_of_testing_sets; i++) {
 			mat[i] = vector<NUMS>(n_rows * n_cols);
 			for (int j = 0; j < n_rows * n_cols; j++) {
-				input_test_data.read((char*)& c, sizeof(c)), mat[i][j] = (double)((int)c);
+				input_test_data.read((char*)& c, sizeof(c)), mat[i][j] = (double)((int)c) / NORMALIZING_CONSTANT;
 			}
 		}
 
