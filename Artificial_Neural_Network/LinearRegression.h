@@ -10,8 +10,8 @@ class LinearRegression
 private:
 	vector<vector<NUMS>> input_to_f_weight;
 	vector<vector<NUMS>> f_to_s_weight;
-	vector<NUMS> first;
-	vector<NUMS> second;
+	NUMS first;
+	NUMS second;
 
 public:
 	LinearRegression(int input_size, int f_neurons, int s_neurons);

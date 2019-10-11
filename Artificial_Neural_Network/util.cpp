@@ -58,27 +58,25 @@ vector<vector<NUMS>> operator+(const vector<vector<NUMS>>& a1, const vector<vect
 	return mat;
 }
 
-vector<vector<NUMS>> operator+(const vector<vector<NUMS>>& a1, const vector<NUMS>& b1)
+vector<vector<NUMS>> operator+(const vector<vector<NUMS>>& a1, const NUMS& b1)
 {
-	assert(a1[0].size() == b1.size());
 	vector<vector<NUMS>> mat = vector<vector<NUMS>>(a1.size());
 	for (size_t i = 0; i < a1.size(); i++) {
 		mat[i] = vector<NUMS>(a1[0].size());
 		for (size_t j = 0; j < a1[i].size(); j++) {
-			mat[i][j] = a1[i][j] + b1[i];
+			mat[i][j] = a1[i][j] + b1;
 		}
 	}
 	return mat;
 }
 
-vector<vector<NUMS>> operator+(const vector<NUMS>& a1, const vector<vector<NUMS>>& b1)
+vector<vector<NUMS>> operator+(const NUMS& a1, const vector<vector<NUMS>>& b1)
 {
-	assert(a1.size() == b1[0].size());
 	vector<vector<NUMS>> mat = vector<vector<NUMS>>(b1.size());
 	for (size_t i = 0; i < b1.size(); i++) {
 		mat[i] = vector<NUMS>(b1[0].size());
 		for (size_t j = 0; j < b1[i].size(); j++) {
-			mat[i][j] = b1[i][j] + a1[i];
+			mat[i][j] = b1[i][j] + a1;
 		}
 	}
 	return mat;
@@ -119,11 +117,6 @@ vector<vector<NUMS>> operator-(const NUMS& a1, const vector<vector<NUMS>>& b1)
 		}
 	}
 	return mat;
-}
-
-vector<vector<NUMS>> operator-(const vector<NUMS>& a1, const vector<NUMS>& b1) {
-	assert();
-	vector<vector<NUMS>> mat = 
 }
 
 vector<vector<NUMS>> sigmoid(const vector<vector<NUMS>>& a1)
