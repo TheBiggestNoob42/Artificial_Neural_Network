@@ -1,28 +1,12 @@
 #pragma once
+#include <iostream>
+using namespace std;
+
 #define NUMS double
-#define MAT_EQUAL_CHECK(X, Y) if (X.size != Y.size) __debugbreak();\
-					 if (X.ray[0].size != Y.ray[0].size) __debugbreak();
-#define MAT_DOT_CHECK(X, Y) if (X.ray[0].size != Y.size) __debugbreak();
+#define MAT_EQUAL_CHECK(X, Y) if (X.size() != Y.size()) { cout << "X.size: " << X.size() << "\tY.size: " << Y.size() << endl; __debugbreak(); }\
+					 if (X[0].size() != Y[0].size()) { cout << "X[0].size: " << X[0].size() << "\tY[0].size: " << Y[0].size() << endl; __debugbreak(); }
+#define MAT_DOT_CHECK(X, Y) if (X[0].size() != Y.size()) __debugbreak();
 
 #include <stdlib.h>
-
-template <typename T>
-struct vector {
-	size_t size;
-	T* ray;
-
-	vector() {
-		size = sizeof(T);
-		ray = (T*)malloc(size);
-	}
-
-	vector(size_t s) {
-		ray = (T*)malloc(sizeof(T) * s);
-		size = s;
-	}
-
-	~vector() {
-		delete[] ray;
-		ray = NULL;
-	}
-};
+#include <vector>
+using namespace std;
