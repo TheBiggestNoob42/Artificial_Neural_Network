@@ -36,7 +36,11 @@ vector<vector<NUMS>> MNIST_Reader::mnist_images(bool is_train)
 
 		char c;
 		for (int i = 0; i < number_of_training_sets; i++) {
-			mat[i] = vector<NUMS>(n_rows * n_cols);
+			try {
+				mat[i] = vector<NUMS>(n_rows * n_cols);
+			} catch (std::bad_alloc &e) {
+				cout << "Wassup with it; it's the system's fault" << endl;
+			}
 			for (int j = 0; j < n_rows * n_cols; j++) {
 				input_train_data.read((char*)& c, sizeof(c)), mat[i][j] = (double)((int)c) / NORMALIZING_CONSTANT;
 			}

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <thrust/host_vector.h>
 #include "declarations.h"
 #include "util.h"
 
@@ -22,4 +23,6 @@ public:
 	vector<vector<vector<NUMS>>> getWeight();
 	vector<NUMS> getBiases();
 };
+
+
 

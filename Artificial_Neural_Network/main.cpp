@@ -8,6 +8,7 @@
 using namespace std;
 
 int main() {
+	// cl::Platform platform;
 	srand(1);
 	MNIST_Reader reader(5, 1000);
 	vector<vector<NUMS>> X_train = reader.get_training_images();
