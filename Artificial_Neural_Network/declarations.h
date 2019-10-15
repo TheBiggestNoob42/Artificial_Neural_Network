@@ -2,7 +2,7 @@
 #include <iostream>
 #include <assert.h>
 #include <stdlib.h>
-// #include <vector>
+#include <vector>
 using namespace std;
 
 #define NUMS double
@@ -10,6 +10,7 @@ using namespace std;
 					 if (X[0].size() != Y[0].size()) { cout << "X[0].size: " << X[0].size() << "\tY[0].size: " << Y[0].size() << endl; __debugbreak(); }
 #define MAT_DOT_CHECK(X, Y) if (X[0].size() != Y.size()) __debugbreak();
 
+/*
 template<typename T>
 class vector<T> {
 	T* ray;
@@ -49,3 +50,4 @@ class vector<T> {
 		}
 	}
 };
+*/
